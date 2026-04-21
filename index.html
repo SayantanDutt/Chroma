@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Color Extractor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Image Color Extractor</h1>
+      <p class="subtitle">Upload an image and pull its dominant color palette in seconds.</p>
+    </header>
+
+    <section class="upload-section">
+      <label for="file-input" id="drop-zone" class="drop-zone" tabindex="0">
+        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
+        <span class="drop-title">Drag &amp; drop an image here</span>
+        <span class="drop-sub">or click to browse (PNG, JPG, JPEG, WEBP)</span>
+        <input id="file-input" type="file" accept="image/png,image/jpeg,image/jpg,image/webp" hidden />
+      </label>
+
+      <div class="controls">
+        <label for="color-count" class="slider-label">
+          Number of colors: <span id="color-count-value">6</span>
+        </label>
+        <input type="range" id="color-count" min="3" max="12" value="6" step="1" />
+      </div>
+    </section>
+
+    <div id="error-message" class="error hidden" role="alert"></div>
+
+    <section id="results" class="results hidden">
+      <div class="preview-wrapper">
+        <img id="preview" alt="Uploaded preview" />
+      </div>
+
+      <div class="palette-wrapper">
+        <div class="palette-header">
+          <h2>Palette</h2>
+          <div class="palette-actions">
+            <button id="copy-all" type="button" class="btn btn-secondary">Copy All</button>
+            <button id="download-palette" type="button" class="btn btn-primary">Download Palette</button>
+          </div>
+        </div>
+        <div id="palette" class="palette"></div>
+      </div>
+    </section>
+
+    <div id="loader" class="loader hidden" aria-live="polite">
+      <div class="spinner"></div>
+      <span>Extracting colors…</span>
+    </div>
+  </main>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite">Copied!</div>
+
+  <canvas id="work-canvas" hidden></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
